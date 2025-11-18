@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Finance App</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#2ecc71">
+</head>
+<body>
+
+<!-- LOGIN (iOS 4S Classic style) -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="app-icon">
+      <div class="icon-gloss"></div>
+      <div class="icon-text">MF</div>
+    </div>
+    <h1 class="app-title">My Finance</h1>
+    <div class="login-fields">
+      <input id="nickname" placeholder="Nickname" type="text" autocomplete="username">
+      <input id="senha" placeholder="Senha" type="password" autocomplete="current-password">
+    </div>
+    <div class="login-actions">
+      <button id="btnLogin" class="ios-btn">Entrar</button>
+      <button id="btnCriarConta" class="ios-btn ios-btn-light">Criar Conta</button>
+    </div>
+    <p class="login-note">Estilo iOS 4S — My Finance App</p>
+  </div>
+</div>
+
+<!-- APP PRINCIPAL (oculto até login) -->
+<div id="app-principal" class="app-root" style="display:none;">
+  <aside class="sidebar">
+    <div class="sidebar-top"><h2>Menu</h2></div>
+    <nav>
+      <button onclick="abrirSecao('config')">Configurações</button>
+      <button onclick="abrirSecao('relatorios')">Relatórios</button>
+      <button onclick="abrirSecao('orcamento')">Orçamento</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="logout" onclick="logout()">Sair</button>
+    </div>
+  </aside>
+
+  <main class="main-container">
+    <section class="left-column">
+      <div class="catalogo-container">
+        <h3>Catálogo</h3>
+        <div id="catalogo-lista" class="catalogo-lista"></div>
+        <input id="novo-item" placeholder="Adicionar item e Enter..." onkeydown="handleNovoItem(event)">
+      </div>
+
+      <div class="carteira-box">
+        <h4>Carteira</h4>
+        <div id="carteira-lista" class="carteira-list"></div>
+      </div>
+    </section>
+
+    <section class="right-column">
+      <header class="top-bar">
+        <h2>Saldo Atual: <span id="saldo">R$ 0,00</span></h2>
+        <div class="actions">
+          <button onclick="mostrarFormulario('receita')" class="action-btn">Nova Receita</button>
+          <button onclick="mostrarFormulario('despesa')" class="action-btn">Nova Despesa</button>
+        </div>
+      </header>
+
+      <div id="formulario" class="modal" style="display:none;">
+        <h3 id="tituloFormulario"></h3>
+        <input id="descricao" placeholder="Descrição">
+        <input id="valor" placeholder="Valor (R$)" oninput="formatarInputR$(this)">
+        <select id="meio-pagamento">
+          <option value="credito">Cartão - Crédito</option>
+          <option value="debito">Cartão - Débito</option>
+          <option value="vr">Vale Refeição</option>
+          <option value="va">Vale Alimentação</option>
+          <option value="vt">Vale Transporte</option>
+          <option value="dinheiro">Dinheiro</option>
+        </select>
+        <div class="modal-actions">
+          <button onclick="adicionarTransacao()" class="save-btn">Salvar</button>
+          <button onclick="fecharFormulario()" class="cancel-btn">Cancelar</button>
+        </div>
+      </div>
+
+      <h3>Histórico</h3>
+      <div id="lista" class="lista-transacoes"></div>
+    </section>
+  </main>
+</div>
+
+<!-- POPUP CATÁLOGO -->
+<div id="popup-detalhes" class="popup-detalhes" style="display:none;">
+  <h3 id="item-nome">Item</h3>
+
+  <label>Pagamento</label>
+  <select id="item-tipo">
+    <option>Crédito</option>
+    <option>Débito</option>
+    <option>Vale Refeição</option>
+    <option>Vale Alimentação</option>
+    <option>Vale Transporte</option>
+    <option>Dinheiro</option>
+  </select>
+
+  <label>Preço sugerido (R$)</label>
+  <input id="item-preco" oninput="formatarInputR$(this)">
+
+  <label>Quantidade</label>
+  <input id="item-quantidade" type="number" min="1" value="1">
+
+  <label>Valor exibido</label>
+  <select id="item-valor-exibido">
+    <option value="unitario">Unitário</option>
+    <option value="total">Total</option>
+  </select>
+
+  <label>Observações / Meta</label>
+  <textarea id="item-meta" rows="3"></textarea>
+
+  <div class="popup-actions">
+    <button class="btn-acao" onclick="salvarDetalhes()">Salvar</button>
+    <button class="btn-acao" onclick="fecharPopup()">Fechar</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js').catch(()=>{/* ignore registration errors during dev */});
+  }
+</script>
+</body>
+</html>

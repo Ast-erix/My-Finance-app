@@ -1,0 +1,79 @@
+:root{
+  --green:#2ecc71; --yellow:#f1c40f; --red:#e74c3c; --dark:#2c3e50; --ios-blue:#1d75e7;
+}
+*{box-sizing:border-box}
+body{
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin:0; background:#e8eef6; -webkit-font-smoothing:antialiased;
+}
+
+/* LOGIN iOS 4S */
+.login-screen{ display:flex; align-items:center; justify-content:center; height:100vh; width:100%; background: linear-gradient(#f2f6fb,#e8eef6); }
+.login-card{
+  width:360px; padding:28px; border-radius:14px;
+  background: linear-gradient(#ffffff, #f7f9fc);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8);
+  text-align:center;
+}
+.app-icon{
+  width:84px; height:84px; margin:0 auto 10px; border-radius:18px;
+  background: linear-gradient(#ffffff,#dfe9f6);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+  position:relative; overflow:hidden;
+}
+.icon-gloss{ position:absolute; top:-20%; left:-20%; width:140%; height:60%; background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.9), rgba(255,255,255,0) 40%); transform: rotate(-20deg); opacity:0.95; }
+.icon-text{ position:relative; top:18px; font-weight:bold; font-size:28px; color:#2c3e50; text-shadow:0 1px 0 rgba(255,255,255,0.6); }
+.app-title{ margin:6px 0 14px; color:#555; font-size:20px; }
+.login-fields input{ width:84%; padding:12px; margin:8px 0; border-radius:8px; border:1px solid #cfd8e6; background:linear-gradient(#fff,#f7fbff); font-size:15px; }
+.login-actions{ margin-top:14px; }
+.ios-btn{ width:120px; padding:10px 12px; margin:6px; border-radius:8px; border:none; cursor:pointer; background: linear-gradient(#1d75e7,#195fc3); color:white; font-weight:700; box-shadow: 0 6px 12px rgba(29,117,231,0.28), inset 0 1px 0 rgba(255,255,255,0.2); }
+.ios-btn-light{ background: linear-gradient(#f5f5f5,#eaeaea); color:#333; box-shadow: 0 6px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8); }
+.login-note{ margin-top:12px; font-size:12px; color:#9aa9bf; }
+
+/* APP PRINCIPAL */
+.app-root{ display:flex; min-height:100vh; }
+.sidebar{ width:180px; background:var(--green); color:white; padding:18px; box-sizing:border-box; }
+.sidebar h2{ text-align:center; margin:0 0 12px; font-size:18px; }
+.sidebar nav button{ width:100%; padding:10px; margin:8px 0; border-radius:8px; border:none; background:var(--yellow); color:var(--dark); font-weight:700; cursor:pointer; }
+.sidebar .logout{ width:100%; padding:10px; border-radius:8px; border:none; margin-top:20px; background:var(--red); color:white; font-weight:700; cursor:pointer; }
+.main-container{ flex:1; display:flex; gap:20px; padding:24px; align-items:flex-start; }
+
+/* left column */
+.left-column{ display:flex; flex-direction:column; gap:16px; width:300px; }
+.catalogo-container{ background:var(--yellow); padding:12px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+.catalogo-container h3{ margin:0 0 8px; color:var(--dark); }
+.catalogo-lista div{ display:flex; justify-content:space-between; align-items:center; padding:8px; background:white; margin-bottom:8px; border-radius:8px; }
+.catalogo-lista .btn-editar{ background:none; border:none; cursor:pointer; font-size:16px; color:var(--green); }
+.catalogo-lista .btn-dinheiro{ margin-right:8px; color:var(--dark); }
+
+/* carteira box */
+.carteira-box{ background:var(--green); color:white; padding:12px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+.carteira-list{ display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.carteira-list div{ background:white; color:var(--dark); padding:10px 12px; border-radius:8px; min-width:110px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.08); }
+.carteira-list div span{ display:block; margin-top:6px; font-weight:700; }
+
+/* right column */
+.right-column{ flex:1; min-width:420px; display:flex; flex-direction:column; gap:12px; }
+.top-bar{ display:flex; justify-content:space-between; align-items:center; }
+.action-btn{ padding:10px 12px; border-radius:8px; background:var(--green); color:white; border:none; cursor:pointer; font-weight:700; }
+.action-btn:hover{ background:#27b86b; }
+
+/* modal transaction */
+.modal{ background:#fff; padding:12px; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.08); }
+.modal input, .modal select{ width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd; }
+
+/* history */
+.lista-transacoes .card-transacao{ display:flex; justify-content:space-between; align-items:center; padding:10px; background:#fff; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.06); margin-top:8px; }
+.btn-apagar{ background:var(--red); color:white; border:none; padding:6px 10px; border-radius:8px; cursor:pointer; }
+
+/* popup catalogo */
+.popup-detalhes{ position:fixed; top:14%; left:50%; transform:translateX(-50%); width:340px; padding:18px; border-radius:12px; background: rgba(46,204,113,0.92); color:white; box-shadow:0 12px 30px rgba(0,0,0,0.28); z-index:50; }
+.popup-detalhes input, .popup-detalhes select, .popup-detalhes textarea{ width:100%; padding:8px; margin:6px 0; border-radius:8px; border:none; }
+.btn-acao{ background:var(--yellow); color:var(--dark); padding:10px 12px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
+
+/* responsive */
+@media(max-width:900px){
+  .main-container{ flex-direction:column; padding:12px; }
+  .left-column{ width:100%; }
+  .right-column{ min-width:100%; }
+}
