@@ -2,31 +2,58 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>My Finance App</title>
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#f0f4f8">
   <link rel="stylesheet" href="style.css">
-  <meta name="theme-color" content="#2ecc71">
 </head>
 <body>
 
-<!-- LOGIN (iOS 4S Classic style) -->
+<!-- LOGIN (simples, cor única) -->
 <div class="login-screen" id="login-screen">
   <div class="login-card">
     <div class="app-icon">
-      <div class="icon-gloss"></div>
-      <div class="icon-text">MF</div>
+      <!-- Se quiser usar a imagem que você enviou, ela está em: /mnt/data/285D7227-F05F-4045-8AE8-F827EE653F1D.jpeg -->
+      <img src="/mnt/data/285D7227-F05F-4045-8AE8-F827EE653F1D.jpeg" alt="MF" style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
     </div>
     <h1 class="app-title">My Finance</h1>
+
     <div class="login-fields">
       <input id="nickname" placeholder="Nickname" type="text" autocomplete="username">
       <input id="senha" placeholder="Senha" type="password" autocomplete="current-password">
     </div>
+
     <div class="login-actions">
       <button id="btnLogin" class="ios-btn">Entrar</button>
       <button id="btnCriarConta" class="ios-btn ios-btn-light">Criar Conta</button>
     </div>
-    <p class="login-note">Estilo iOS 4S — My Finance App</p>
+
+    <div class="backup-actions">
+      <button id="btnHasBackup" class="link-btn">Você tem um backfinance?</button>
+      <button id="btnExportBackup" class="link-btn" style="display:none;">Exportar backup</button>
+    </div>
+
+    <p class="login-note" id="footer-text">Seu app financeiro — My Finance</p>
+  </div>
+</div>
+
+<!-- MODAL IMPORT BACKUP -->
+<div id="modal-import" class="modal-overlay" style="display:none;">
+  <div class="modal-card">
+    <h3>Importar backfinance</h3>
+    <p class="muted">Escolha um arquivo .json exportado anteriormente e informe o nickname e a nova senha. (Se esqueceu a senha antiga, tudo bem — poderá restaurar e definir nova senha.)</p>
+
+    <input id="input-backfile" type="file" accept=".json">
+    <label>Nickname desejado</label>
+    <input id="import-nickname" placeholder="Nickname para restaurar">
+    <label>Nova senha</label>
+    <input id="import-senha" placeholder="Defina uma nova senha" type="password">
+
+    <div class="modal-actions" style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px;">
+      <button id="btnImportConfirm" class="save-btn">Importar</button>
+      <button id="btnImportCancel" class="cancel-btn">Cancelar</button>
+    </div>
   </div>
 </div>
 
@@ -40,7 +67,7 @@
       <button onclick="abrirSecao('orcamento')">Orçamento</button>
     </nav>
     <div class="sidebar-bottom">
-      <button class="logout" onclick="logout()">Sair</button>
+      <button class="logout" id="btnLogout">Sair</button>
     </div>
   </aside>
 
@@ -111,7 +138,7 @@
   <label>Quantidade</label>
   <input id="item-quantidade" type="number" min="1" value="1">
 
-  <label>Valor exibido</label>
+  <label>Mostrar valor</label>
   <select id="item-valor-exibido">
     <option value="unitario">Unitário</option>
     <option value="total">Total</option>
